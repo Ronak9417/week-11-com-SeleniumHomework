@@ -35,24 +35,32 @@ public class LoginTest extends BaseTest {
 
     @Test
     public void userShouldLoginSuccessfullyWithValidCredentials() {
+
+        RegisterTest obj = new RegisterTest();
+        // register new user to login because after few hours old user is deleted
+        obj.userShouldRegisterAccountSuccessfully();
+
+
         //Find login and click on login link
         driver.findElement(By.linkText("Log in")).click();
 
         // Enter valid username
-        driver.findElement(By.id("Email")).sendKeys("prime123456@gmail.com");
+        driver.findElement(By.id("Email")).sendKeys(obj.email);
 
         // Enter valid password
         driver.findElement(By.id("Password")).sendKeys("Prime123456.");
 
         //Click on login button
-        driver.findElement(By.xpath("//button[@class='button-1 login-button']")).click();
+        driver.findElement(By.xpath("//button[text() = 'Log in']")).click();
 
         String expectMessage = "Log out";
         //Find the text element and get the text
 
-
-        WebElement actualMessageElement = driver.findElement(By.xpath("//a[@class ='ico-logout']"));
+        WebElement actualMessageElement = driver.findElement(By.xpath(("//a[@class ='ico-logout']")));
         String actualMessage = actualMessageElement.getText();
+
+//        WebElement actualMessageElement = driver.findElement(By.xpath("//a[@class ='ico-logout']"));
+//        String actualMessage = actualMessageElement.getText();
 
         //   Validate actual and expected message
         Assert.assertEquals("No such text passed", expectMessage, actualMessage);

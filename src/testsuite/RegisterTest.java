@@ -12,6 +12,7 @@ import java.util.Random;
 
 public class RegisterTest extends BaseTest {
     String baseUrl = " https://demo.nopcommerce.com/ ";
+    String email;
 
     @Before
 
@@ -61,7 +62,8 @@ public class RegisterTest extends BaseTest {
         emailField.click();
         Random randomGenerator = new Random();// random generator class
         int randomInt = randomGenerator.nextInt(1000);
-        emailField.sendKeys("username"+ randomInt +"@gmail.com");// creating random email generator
+        email="username"+ randomInt +"@gmail.com";
+        emailField.sendKeys(email);// creating random email generator
 
 
         // Enter Password
